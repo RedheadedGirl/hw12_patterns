@@ -1,23 +1,20 @@
 package org.example;
 
+import org.example.adapter.FixedPoolShow;
 import org.example.exception.SettingException;
-import org.example.proxy.ProxyFixedThreadPool;
 import org.example.proxy.ProxyScalableThreadPool;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SettingException {
-//        fixedThreadPool();
-        scalableThreadPool();
+        fixedThreadPool();
+//        scalableThreadPool();
     }
 
     private static void fixedThreadPool() {
-        ProxyFixedThreadPool fixedThreadPool = new ProxyFixedThreadPool(3);
-        fixedThreadPool.execute(getRunnable(1));
-        fixedThreadPool.execute(getRunnable(2));
-        fixedThreadPool.execute(getRunnable(3));
-        fixedThreadPool.start();
-
-        addLastTask(fixedThreadPool);
+        FixedPoolShow show = new FixedPoolShow();
+        show.demonstrate(3, List.of(getRunnable(1), getRunnable(2), getRunnable(3)));
     }
 
     private static void scalableThreadPool() throws SettingException {
